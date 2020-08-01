@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>HtmlCss</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="estilos.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript">
+            $(function(){
+             
+             $("#ocultar").on("click", function(){
+                 $("#dpi").hide(1500);
+                 
+             });
+      
+             $("#mostrar").on("click", function(){
+                $("#dpi").show(1500);
+                $("#cajadetexto").removeClass("div80d");
+                $("#cajadetexto").addClass("div80");
+             });
+             
+             $("#cancelar").on("click", function(){
+                  $('#form1')[0].reset();
+             });
+             
+            $("#opciones").on("change", function(){
+                  //alert($( "#opciones option:selected" ).text());
+                  var seleccion=$("#opciones option:selected").text();
+                  if(seleccion=="Llenar formulario"){
+                    $("#dpi").val("2998662970101");
+                    $("#nombre").val("Marco Antonio");
+                    $("#apellido").val("Enriquez Garrido");
+                    $("#direccion").val("Puerto Barrios Izabal");
+                    $("#correo").val("marco.enrique97@hotmail.com");
+                    $("#telefono").val("4995-0341");
+                    $("#celular").val("4995-0341");
+                    $("#genero").val("1");
+                    $("#obs").val("NINGUNA OBSERVACION");
+                   }
+             });
+                
+             //load();
+             function load(){
+                 $.ajax({
+                     url:"ejemploservelt",//pagina destino 
+                     dataType: "html", //tipo de respuesta
+                     data: "control=1",//datos enviados al servidor, usuario es la variable
+                     success: function(respuesta){
+                         $("#respuesta").html(respuesta);
+                         //$("#respuesta").append(respuesta);
+                       
+                     },
+                     error: function(objAjax, estado, excepcion){
+                         alert("error en la comunicación");
+                     }
+                 });
+             }
+         }) ;        
+      </script> 
+    </head>  
+    <body>
+        <div class="divEncabezado">
+            <div class="logo" id="logo">
+            </div>
+        </div>
+        
+        <div class="logDivTitulo">
+            <h2 class="h2">
+                HTML, CSS, JQUERY
+            </h2>
+        </div>
+        <form name="formulario1" id="form1" action="ejemploservelt" method="POST">
+           <div class="divtotal"> 
+               <div class="seccionDerecha">
+                   <div class="elementoForm">
+                    <input type="number" name="dpi" placeholder="DPI" id="dpi"> 
+                    </div>
+                   <div class="elementoForm">
+                    <input type="text" name="nombre" placeholder="Nombres" id="nombre"> 
+                    </div>
+                   <div class="elementoForm">
+                    <input type="text" name="apellido" placeholder="Apellidos" id="apellido"> 
+                    </div>
+                   <div class="elementoForm">
+                    <input type="text" name="direccion" placeholder="Direccion" id="direccion"> 
+                    </div>
+                   
+                    <div class="elementoForm">
+                        <select name="opciones" id="opciones">
+                            <option value="1"> Seleccione opcion .. </option>
+                             <option value="2">Llenar formulario</option>
+                        </select>
+                     </div>
+                                     <div class="botonIzquierda">
+                   <input type="submit" name="guardar" value="Guardar" id="guardar"><br>
+                  </div>
+                    <div class="botonDerecha">
+                        <input type="button" name="cancelar" value="Cancelar" id="cancelar"><br>
+                        <input type="hidden" name="control" value="1" >
+                    </div>
+            </div>
+            
+            
+            <div class="seccionDerecha">
+                
+                 <div class="botonIzquierda">
+                   <input type="button" name="ocultar" value="Ocultar" id="ocultar"><br>
+                  </div>
+                    <div class="botonDerecha">
+                        <input type="button" name="mostrar" value="Mostrar" id="mostrar"><br>   
+                    </div>
+                </div>      
+               </div>
+            </div>
+               
+            <div class="divtotal" style="height: 300px;" id="respuesta">
+                
+            </div>
+        </form>
+    </body>
+</html>
